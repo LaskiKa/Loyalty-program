@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Best Ever Loyalty Program</title>
+</head>
+<body>
+<h1>Bonus products</h1>
+
+<h2> {% block h2 %} Products: {% endblock %}</h2>
+
+    <ul>
+        {% block content %}
+        {% for product in products %}
+        <li> {{ product.name }}</li>
+        {% endfor %}
+
+        {% endblock %}
+    </ul>
+
+<ul>
+    {% block subjects %} {% endblock %}
+</ul>
+
+<ul>
+    {% block grades %} {% endblock %}
+</ul>
+
+Mój użytkownik {{user}}
+</body>
+</body>
+</html>

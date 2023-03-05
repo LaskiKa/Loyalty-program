@@ -115,7 +115,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 try:
-    from scrumlab.local_settings import DATABASES
+    from Loyalty_project.local_settings import DATABASES
 except ModuleNotFoundError:
     print("Brak konfiguracji bazy danych w pliku local_settings.py!")
     print("Uzupełnij dane i spróbuj ponownie!")

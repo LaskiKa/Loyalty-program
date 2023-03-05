@@ -1,27 +1,32 @@
 from django.db import models
-
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
-class User(models.Model):
-    name = models.CharField(max_length=128)
-    last_name = models.CharField(max_length=128)
-    password = models.CharField(max_length=64)
-    invoices = models.ForeignKey("Invoices", on_delete=models.CASCADE)
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    invoices = models.ForeignKey("Invoices", on_delete=models.CASCADE, null=True)
     points = models.SmallIntegerField(default=0)
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
 
 
 class Invoices(models.Model):
-    invoice_number = models.CharField(max_length=255)
-    vendor = models.CharField(max_length=255, blank=False)
+    invoice_number = models.CharField(max_length=255, null=True)
+    vendor = models.CharField(max_length=255, null=True)
     products = models.ManyToManyField("Products", through="InvoiceProductsList")
-    sale_date = models.DateField(blank=False)
+    sale_date = models.DateField(null=True)
     total_price = models.DecimalField(decimal_places=2, max_digits=9)
 
 
 class InvoiceProductsList(models.Model):
-    invoice = models.ForeignKey(Invoices, on_delete=models.CASCADE)
-    products = models.ForeignKey("Products", on_delete=models.CASCADE)
+    invoice = models.ForeignKey(Invoices, on_delete=models.CASCADE, null=True)
+    products = models.ForeignKey("Products", on_delete=models.CASCADE, null=True)
     qty = models.SmallIntegerField()
 
 

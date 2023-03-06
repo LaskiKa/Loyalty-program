@@ -4,31 +4,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href='{% static "style.css"  %}'>
     <title>Best Ever Loyalty Program</title>
 </head>
 <body>
-<h1>Bonus products</h1>
 
-<h2> {% block h2 %} Products: {% endblock %}</h2>
+<header>
+    <h1>Best Ever Loyalty Program</h1>
+</header>
 
-    <ul>
-        {% block content %}
-        {% for product in products %}
-        <li> {{ product.name }}</li>
-        {% endfor %}
-
-        {% endblock %}
+<nav class="navbar">
+    {% block nav %}
+    <ul class="nav-links">
+        <li class="nav-item"><a href="#">Home</a></li>
+        <li class="nav-item"><a href="#">Our team</a></li>
+        <li class="nav-item"><a href="#">Projects</a></li>
+        <li class="nav-item"><a href="#">Contact</a></li>
     </ul>
+    {% endblock %}
+</nav>
+<h1> {% block h1 %} Bonus products {% endblock %} </h1>
 
+<h2> {% block h2 %} Products: {% endblock %} </h2>
+
+
+{% block content %}
 <ul>
-    {% block subjects %} {% endblock %}
+    {% for product in products %}
+    <li> {{ product.name }}</li>
+    {% endfor %}
 </ul>
+{% endblock %}
 
-<ul>
-    {% block grades %} {% endblock %}
-</ul>
 
-Mój użytkownik {{user}}
+<footer>
+    <p>{% block footer %} Mój użytkownik: {{ user }} {% endblock %}</p>
+    <p>Best Ever Loyalty Program App</p>
+</footer>
+
+
 </body>
 </body>
 </html>

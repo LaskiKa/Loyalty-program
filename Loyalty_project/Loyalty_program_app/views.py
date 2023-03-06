@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from Loyalty_program_app.models import Products
-from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView
 
@@ -14,6 +13,11 @@ class Base(View):
                       {'products': products})
 
 
+class UserMainSite(View):
+    def get(self, request):
+        return render(request,
+                      "Loyalty_program_app/user-main-site.html")
+
 class ProductAddView(CreateView):
     model = Products
     fields = ["name", "unit_price", "basic_points", "category"]
@@ -22,4 +26,3 @@ class ProductAddView(CreateView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
-

@@ -1,0 +1,13 @@
+{% extends "Loyalty_program_app/base.html" %}
+
+{% block h1 %} Edytuj produkt {% endblock %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="edytuj produkt">
+</form>
+
+<div style="color: green">{{action}}</div>
+{% endblock %}

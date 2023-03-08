@@ -1,17 +1,34 @@
 {% extends "Loyalty_program_app/user-main-site.html" %}
 
 
-
 {% block content %}
 
-<ul>
+<table>
+    <thead>
+    <tr>
+        <th>Numer faktury</th>
+        <th>Sprzedawca</th>
+        <th> Data sprzedaży</th>
+        <th> wartość</th>
+    </tr>
+    </thead>
+    <tbody>
     {% for invoice in object_list %}
-    <li> {{invoice.invoice_number}}</li>
-    {% empty %}
-    <li>Na razie brak faktur</li>
+    <tr>
+        <th class="invoice-table"><a href="">{{invoice.invoice_number}} </a></th>
+        <td class="invoice-table">{{invoice.vendor}}</td>
+        <td class="invoice-table">{{invoice.sale_date|date:"d.m.Y" }}</td>
+        <td class="invoice-table">{{invoice.total_price}} zł</td>
+    </tr>
+    {% empty %}}
+    <tr>
+        <th class="invoice-table">Brak faktur</th>
+        <td class="invoice-table">-</td>
+        <td class="invoice-table">-</td>
+        <td class="invoice-table">-</td>
+    </tr>
     {% endfor %}
-
-</ul>
-
+    </tbody>
+</table>
 
 {% endblock %}

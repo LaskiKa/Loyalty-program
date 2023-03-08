@@ -5,6 +5,17 @@ header {
   justify-content: center;
   background-image: linear-gradient(green, darkgreen, green);
 }
+table {
+  width: 100%;
+}
+
+table, th, td {
+  border: 2px solid forestgreen;
+  border-collapse: collapse;
+  font-size: 25px;
+  text-align: center;
+
+}
 
 nav {
   width: 100%;
@@ -39,3 +50,4 @@ footer {
   background-image: linear-gradient(green, darkgreen, green);
   font-size: 15px;
 }
+

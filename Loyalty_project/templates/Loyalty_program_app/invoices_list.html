@@ -1,0 +1,17 @@
+{% extends "Loyalty_program_app/user-main-site.html" %}
+
+
+
+{% block content %}
+
+<ul>
+    {% for invoice in object_list %}
+    <li> {{invoice.invoice_number}}</li>
+    {% empty %}
+    <li>Na razie brak faktur</li>
+    {% endfor %}
+
+</ul>
+
+
+{% endblock %}

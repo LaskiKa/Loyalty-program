@@ -5,10 +5,12 @@
     {% block nav %}
     <ul class="nav-links">
         <li class="nav-item"><a href="{% url 'user-main-site' %}">Home</a></li>
-        <li class="nav-item"><a href="#">Zestawienie faktur</a></li>
+        <li class="nav-item"><a href="{% url 'invoices-list' %}">Zestawienie faktur</a></li>
         <li class="nav-item"><a href="#">Zestawienie zakupów</a></li>
         <li class="nav-item"><a href="#">Katalog nagród</a></li>
+        <li class="nav-item"><a href="#">Wyloguj</a></li>
     </ul>
     {% endblock %}
 
 {% block h2 %} {% endblock %}
+s

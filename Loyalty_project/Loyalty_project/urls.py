@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Loyalty_program_app.views import Base, ProductAddView, UserMainSite, ProductUpdateView
+from Loyalty_program_app.views import Base, ProductAddView, UserMainSite, ProductUpdateView, InvoiceListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('base/', Base.as_view(), name='base'),
     path('user-main-site', UserMainSite.as_view(), name='user-main-site'),
     path('product-add/', ProductAddView.as_view(), name='product-add'),
-    path('product-update/<int:pk>/', ProductUpdateView.as_view(), name='product-update')
+    path('product-update/<int:pk>/', ProductUpdateView.as_view(), name='product-update'),
+    path('invoices-list/', InvoiceListView.as_view(), name='invoices-list')
 
 ]

@@ -1,0 +1,35 @@
+{% extends "Loyalty_program_app/user-main-site.html" %}
+
+{% block h2 %} <h2>Faktura nr {{invoice.invoice_number}}</h2> {% endblock %}
+
+{% block content %}
+
+<div>Suma punktów: {{sumofpoints}}</div>
+<div>Szczegóły: </div>
+
+
+<table>
+    <thead>
+    <tr>
+        <th>Nazwa produktu</th>
+        <th>Ilość</th>
+        <th>Wartość punktów</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{object}}
+    {% for product in invoiceproductlist %}
+    <tr>
+        <th class="invoice-table">{{product.products.name}}</th>
+        <td class="invoice-table">{{product.qty}}</td>
+        {% for key, value in pointsperprod %}
+        {% if key == product.id %}
+        <td class="invoice-table">{{value}}</td>
+        {% endif %}
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

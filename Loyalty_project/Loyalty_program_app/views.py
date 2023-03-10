@@ -2,9 +2,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from Loyalty_program_app.models import Products, InvoiceProductsList, UserProfile, Invoices
 from django.views import View
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DetailView
 from django.views.generic.list import ListView
-
 
 
 # Create your views here.
@@ -40,15 +39,35 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class InvoiceListView(LoginRequiredMixin, ListView):
-    model = InvoiceProductsList
+    model = Invoices
     paginate_by = 30
 
     def get_queryset(self):
-        userprofile = UserProfile.objects.filter(user=self.request.user.id)
-        print(userprofile)
+        # userprofile = UserProfile.objects.filter(user=self.request.user.id)
         userinvoices = Invoices.objects.filter(user=self.request.user.id)
-        print(userinvoices)
-        # userinvoices = userprofile.invoices
-        print(self.request.user.id)
-        # print(userinvoices)
         return userinvoices
+
+
+class InvoiceDetaliView(LoginRequiredMixin, View):
+
+    def get(self, request, pk):
+        pointsperprod = {}
+        sumofpoints = 0
+        invoice = Invoices.objects.get(pk=pk)
+        invoiceproductlist = InvoiceProductsList.objects.filter(invoice=pk)
+
+        for item in invoiceproductlist:
+            qty = item.qty
+            basic_points = item.products.basic_points
+            pointsperprod[item.id] = int(qty * basic_points)
+            sumofpoints += int(qty * basic_points)
+        return render(request,
+                      'Loyalty_program_app/invoices_detail.html',
+                      context={'invoiceproductlist': invoiceproductlist,
+                               'invoice': invoice,
+                               'pointsperprod': pointsperprod.items(),
+                               'sumofpoints': sumofpoints})
+
+    # def get_queryset(self):
+    #     # invoiceproductlist = InvoiceProductsList.objects.filter(invoice=self.kwargs.get('invoice_id'))
+    #     return invoiceproductlist

@@ -2,6 +2,7 @@
 
 
 {% block content %}
+<button class="invoice-add-button"><a href="">Dodaj fakturę</a></button>
 
 <table>
     <thead>
@@ -9,13 +10,13 @@
         <th>Numer faktury</th>
         <th>Sprzedawca</th>
         <th> Data sprzedaży</th>
-        <th> wartość</th>
+        <th> Wartość zakupów </th>
     </tr>
     </thead>
     <tbody>
     {% for invoice in object_list %}
     <tr>
-        <th class="invoice-table"><a href="">{{invoice.invoice_number}} </a></th>
+        <th class="invoice-table"><a href="{% url 'invoice-detail' invoice.id %}">{{invoice.invoice_number}}</a></th>
         <td class="invoice-table">{{invoice.vendor}}</td>
         <td class="invoice-table">{{invoice.sale_date|date:"d.m.Y" }}</td>
         <td class="invoice-table">{{invoice.total_price}} zł</td>

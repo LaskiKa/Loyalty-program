@@ -1,53 +1,87 @@
 
 header {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  background-image: linear-gradient(green, darkgreen, green);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-image: linear-gradient(green, darkgreen, green);
 }
+
 table {
-  width: 100%;
+    width: 100%;
 }
 
 table, th, td {
-  border: 2px solid forestgreen;
-  border-collapse: collapse;
-  font-size: 25px;
-  text-align: center;
+    border: 2px solid forestgreen;
+    border-collapse: collapse;
+    font-size: 25px;
+    text-align: center;
 
 }
 
 nav {
-  width: 100%;
-  background-image: linear-gradient(green, darkgreen, green);
+    width: 100%;
+    background-image: linear-gradient(green, darkgreen, green);
 
-  /*padding-left: 10px;*/
-  /*padding-right: 10px;*/
+    /*padding-left: 10px;*/
+    /*padding-right: 10px;*/
 }
 
 .navbar {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 
 }
 
 .nav-links {
-  display: flex;
-  list-style: none;
+    display: flex;
+    list-style: none;
+}
+
+.nav-item-points {
+    color: white;
+    display: inline-block;
+    padding: 27px;
 }
 
 .nav-item a {
-  display: inline-block;
-  padding: 10px 15px;
-  text-decoration: none;
-  color: white;
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: white;
 }
 
 footer {
-  bottom: 0px;
-  position: fixed;
-  width: 100%;
-  background-image: linear-gradient(green, darkgreen, green);
-  font-size: 15px;
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
+    background-image: linear-gradient(green, darkgreen, green);
+    font-size: 15px;
 }
 
+.invoice-add {
+    display: flex;
+    justify-content: end;
+    padding: 15px;
+}
+
+.invoice-add-button {
+    border: 3px solid green;
+    background-image: linear-gradient(darkgreen, green);
+    padding: 10px 30px;
+    border-radius: 12px;
+}
+
+.invoice-add-button a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+input[type = submit] {
+    background-image: linear-gradient(darkgreen, green);
+    color: white;
+    padding: 10px 30px;
+    border-radius: 12px;
+    font-size: 15px;
+
+}

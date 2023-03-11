@@ -30,8 +30,13 @@ class InvoiceProductsList(models.Model):
     qty = models.SmallIntegerField()
 
 
+
+
 class Products(models.Model):
     name = models.CharField(max_length=255)
     unit_price = models.DecimalField(decimal_places=2, max_digits=9)
     basic_points = models.SmallIntegerField()
     category = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.name

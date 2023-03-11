@@ -1,6 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from Loyalty_program_app.models import Products, InvoiceProductsList, UserProfile, Invoices
+
 from django.views import View
 from django.views.generic import CreateView, UpdateView, DetailView
 from django.views.generic.list import ListView
@@ -17,8 +19,10 @@ class Base(View):
 
 class UserMainSite(LoginRequiredMixin, View):
     def get(self, request):
+        userpoints = UserProfile.objects.get(user=self.request.user).points
         return render(request,
-                      "Loyalty_program_app/user-main-site.html")
+                      "Loyalty_program_app/user-main-site.html",
+                      context={'userpoints': userpoints})
 
 
 class ProductAddView(LoginRequiredMixin, CreateView):
@@ -40,11 +44,10 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
 class InvoiceListView(LoginRequiredMixin, ListView):
     model = Invoices
-    paginate_by = 30
+
 
     def get_queryset(self):
-        # userprofile = UserProfile.objects.filter(user=self.request.user.id)
-        userinvoices = Invoices.objects.filter(user=self.request.user.id)
+        userinvoices = Invoices.objects.filter(user=self.request.user.id).order_by('-sale_date')
         return userinvoices
 
 
@@ -71,3 +74,9 @@ class InvoiceDetaliView(LoginRequiredMixin, View):
     # def get_queryset(self):
     #     # invoiceproductlist = InvoiceProductsList.objects.filter(invoice=self.kwargs.get('invoice_id'))
     #     return invoiceproductlist
+
+
+class InvoiceAddView(LoginRequiredMixin, CreateView):
+    model = Invoices
+    fields = ["invoice_number", "vendor", "products", "sale_date", "total_price"]
+    success_url = HttpResponseRedirect('invoices-list')

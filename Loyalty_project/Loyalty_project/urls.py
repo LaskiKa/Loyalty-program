@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Loyalty_program_app.views import Base, ProductAddView, UserMainSite, ProductUpdateView, InvoiceListView,InvoiceDetaliView
+from Loyalty_program_app.views import Base, ProductAddView, UserMainSite, ProductUpdateView, InvoiceListView
+from Loyalty_program_app.views import InvoiceDetaliView, InvoiceAddView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,6 +25,6 @@ urlpatterns = [
     path('product-add/', ProductAddView.as_view(), name='product-add'),
     path('product-update/<int:pk>/', ProductUpdateView.as_view(), name='product-update'),
     path('invoices-list/', InvoiceListView.as_view(), name='invoices-list'),
-    path('invoice-detail/<int:pk>/', InvoiceDetaliView.as_view(), name='invoice-detail')
-
+    path('invoice-detail/<int:pk>/', InvoiceDetaliView.as_view(), name='invoice-detail'),
+    path('invoice-add/', InvoiceAddView.as_view(), name='invoice-add')
 ]

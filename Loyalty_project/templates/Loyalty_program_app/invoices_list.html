@@ -2,7 +2,9 @@
 
 
 {% block content %}
-<button class="invoice-add-button"><a href="">Dodaj fakturę</a></button>
+<div class="invoice-add">
+    <button class="invoice-add-button"><a href="{% url 'invoice-add' %}">Dodaj fakturę</a></button>
+</div>
 
 <table>
     <thead>
@@ -10,7 +12,7 @@
         <th>Numer faktury</th>
         <th>Sprzedawca</th>
         <th> Data sprzedaży</th>
-        <th> Wartość zakupów </th>
+        <th> Wartość zakupów</th>
     </tr>
     </thead>
     <tbody>

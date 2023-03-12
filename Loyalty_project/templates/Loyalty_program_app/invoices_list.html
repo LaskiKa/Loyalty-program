@@ -1,5 +1,6 @@
 {% extends "Loyalty_program_app/user-main-site.html" %}
 
+{% block h2 %} <h2>Lista faktur</h2> {% endblock %}
 
 {% block content %}
 <div class="invoice-add">
@@ -12,16 +13,20 @@
         <th>Numer faktury</th>
         <th>Sprzedawca</th>
         <th> Data sprzedaży</th>
-        <th> Wartość zakupów</th>
+        <th> Liczba punktów </th>
     </tr>
     </thead>
     <tbody>
-    {% for invoice in object_list %}
+    {% for invoice in userinvoices %}
     <tr>
         <th class="invoice-table"><a href="{% url 'invoice-detail' invoice.id %}">{{invoice.invoice_number}}</a></th>
         <td class="invoice-table">{{invoice.vendor}}</td>
         <td class="invoice-table">{{invoice.sale_date|date:"d.m.Y" }}</td>
-        <td class="invoice-table">{{invoice.total_price}} zł</td>
+        {% for key, value in pointsperinvoice %}
+        {% if key == invoice.id %}
+        <td class="invoice-table">{{value}}</td>
+        {% endif %}
+        {%endfor%}
     </tr>
     {% empty %}}
     <tr>

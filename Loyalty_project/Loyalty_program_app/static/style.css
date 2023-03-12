@@ -51,11 +51,18 @@ nav {
 }
 
 footer {
+    display: flex;
+    justify-content: left;
     bottom: 0px;
     position: fixed;
     width: 100%;
     background-image: linear-gradient(green, darkgreen, green);
     font-size: 15px;
+
+}
+
+.footer-p {
+    margin-left: 10px;
 }
 
 .invoice-add {
@@ -75,6 +82,10 @@ footer {
     color: white;
     font-size: 20px;
     text-decoration: none;
+}
+
+.invoice-table a{
+    color: green;
 }
 
 input[type = submit] {

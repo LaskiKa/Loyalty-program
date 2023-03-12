@@ -42,20 +42,35 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     template_name_suffix = '_update_form'
 
 
-class InvoiceListView(LoginRequiredMixin, ListView):
-    model = Invoices
+class InvoiceListView(LoginRequiredMixin, View):
 
-
-    def get_queryset(self):
+    def get(self, request):
         userinvoices = Invoices.objects.filter(user=self.request.user.id).order_by('-sale_date')
-        return userinvoices
+        userpoints = UserProfile.objects.get(user=self.request.user).points
+        pointsperinvoice = {}
+
+        for invoice in userinvoices:
+            invoicepoints = 0
+            invoiceproductlist = InvoiceProductsList.objects.filter(invoice=invoice.pk)
+            for item in invoiceproductlist:
+                qty = item.qty
+                basic_points = item.products.basic_points
+                invoicepoints += int(qty * basic_points)
+
+            pointsperinvoice[invoice.id] = invoicepoints
+
+        return render(request,
+                      'Loyalty_program_app/invoices_list.html',
+                      context={"userinvoices": userinvoices,
+                               "userpoints": userpoints,
+                               "pointsperinvoice": pointsperinvoice.items()})
 
 
 class InvoiceDetaliView(LoginRequiredMixin, View):
 
     def get(self, request, pk):
         pointsperprod = {}
-        sumofpoints = 0
+        sumpointsofinvoice = 0
         invoice = Invoices.objects.get(pk=pk)
         invoiceproductlist = InvoiceProductsList.objects.filter(invoice=pk)
 
@@ -63,13 +78,13 @@ class InvoiceDetaliView(LoginRequiredMixin, View):
             qty = item.qty
             basic_points = item.products.basic_points
             pointsperprod[item.id] = int(qty * basic_points)
-            sumofpoints += int(qty * basic_points)
+            sumpointsofinvoice += int(qty * basic_points)
         return render(request,
                       'Loyalty_program_app/invoices_detail.html',
                       context={'invoiceproductlist': invoiceproductlist,
                                'invoice': invoice,
                                'pointsperprod': pointsperprod.items(),
-                               'sumofpoints': sumofpoints})
+                               'sumpointsofinvoice': sumpointsofinvoice})
 
     # def get_queryset(self):
     #     # invoiceproductlist = InvoiceProductsList.objects.filter(invoice=self.kwargs.get('invoice_id'))

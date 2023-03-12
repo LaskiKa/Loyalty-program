@@ -6,7 +6,7 @@
     <ul class="nav-links">
         <li class="nav-item"><a href="{% url 'user-main-site' %}">Home</a></li>
         <li class="nav-item"><a href="{% url 'invoices-list' %}">Zestawienie faktur</a></li>
-        <li class="nav-item"><a href="#">Zestawienie zakupów</a></li>
+        <li class="nav-item"><a href="{% url 'pruchase-summary' %}">Zestawienie zakupów</a></li>
         <li class="nav-item"><a href="#">Katalog nagród</a></li>
         <li class="nav-item"><a href="#">Wyloguj</a></li>
     </ul>
@@ -17,7 +17,6 @@
 {% block h2 %} <h2>Zapoznaj się z zasadami porgramu lojalnościowego</h2> {% endblock %}
 
 {% block content %}
-
 
 
 {% endblock %}

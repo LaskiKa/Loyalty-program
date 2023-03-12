@@ -31,12 +31,7 @@ class Command(BaseCommand):
                     )
 
                 invoiceproductlist = InvoiceProductsList.objects.get_or_create(
-                    invoice=Invoices.objects.latest('id'),
+                    invoice=Invoices.objects.get(invoice_number=invoice_number),
                     products=Products.objects.get(pk=product_id),
                     qty=qty
                 )
-
-                user = UserProfile.objects.get(pk=user_id)
-                product = Products.objects.get(pk=product_id)
-                user.points += product.basic_points * int(qty)
-                user.save()

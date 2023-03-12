@@ -46,6 +46,8 @@ class InvoiceListView(LoginRequiredMixin, View):
 
     def get(self, request):
         userinvoices = Invoices.objects.filter(user=self.request.user.id).order_by('-sale_date')
+        for a in userinvoices:
+            print(a.invoice_number)
         userpoints = UserProfile.objects.get(user=self.request.user).points
         pointsperinvoice = {}
 
@@ -86,12 +88,40 @@ class InvoiceDetaliView(LoginRequiredMixin, View):
                                'pointsperprod': pointsperprod.items(),
                                'sumpointsofinvoice': sumpointsofinvoice})
 
-    # def get_queryset(self):
-    #     # invoiceproductlist = InvoiceProductsList.objects.filter(invoice=self.kwargs.get('invoice_id'))
-    #     return invoiceproductlist
-
 
 class InvoiceAddView(LoginRequiredMixin, CreateView):
     model = Invoices
     fields = ["invoice_number", "vendor", "products", "sale_date", "total_price"]
     success_url = HttpResponseRedirect('invoices-list')
+
+
+class PurchesSummary(LoginRequiredMixin, View):
+    """Zestawienie zakupów z podziałem na lata"""
+
+    def get(self, request):
+        userinvoices = Invoices.objects.filter(user=self.request.user.id).order_by('-sale_date')
+        userpoints = UserProfile.objects.get(user=self.request.user).points
+        products = Products.objects.all()
+        productsummary = {}
+
+        for product in products:
+            productsummary[product.name] = [0, 0]
+
+        for invoice in userinvoices:
+            invoiceproductlist = InvoiceProductsList.objects.filter(invoice=invoice.pk)
+
+            for item in invoiceproductlist:
+                qty = item.qty
+                productpoints = 0
+                basic_points = item.products.basic_points
+                productpoints += int(qty * basic_points)
+
+                productsummary[item.products.name][0] += qty
+                productsummary[item.products.name][1] += productpoints
+
+                print(item.products.name, productsummary[item.products.name][0], productsummary[item.products.name][1] )
+
+        return render(request,
+                      'Loyalty_program_app/purchase_summary.html',
+                      context={"userpoints": userpoints,
+                               "productsummary": productsummary.items()})

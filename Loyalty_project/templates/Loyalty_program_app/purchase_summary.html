@@ -1,0 +1,19 @@
+{% extends "Loyalty_program_app/user-main-site.html" %}
+
+{% block h2 %} <h2>Zestawienie zakupów</h2> {% endblock %}
+
+{% block content %}
+
+
+
+<!--        {% for year in years %}-->
+<!--        <button class="year-button-filer">{{year}}</button>-->
+<!--        {%endfor%}-->
+
+{% for key, list in productsummary %}
+<p> {{key}} - ilość: {{list.0}}, wartość punktów {{list.1}}</p>
+{% endfor %}
+
+
+
+{% endblock %}

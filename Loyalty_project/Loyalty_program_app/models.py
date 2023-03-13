@@ -56,6 +56,7 @@ class Prizes(models.Model):
 
 class Carts(models.Model):
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
+    prize = models.ManyToManyField(Prizes, through='CartItems')
     order_date = models.DateField()
 
 class CartItems(models.Model):

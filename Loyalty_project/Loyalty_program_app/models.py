@@ -42,3 +42,30 @@ class Products(models.Model):
 
     def __str__(self):
         return self.name
+
+class Prizes(models.Model):
+    name = models.CharField(max_length=255)
+    points_value = models.IntegerField()
+    available_quantity = models.SmallIntegerField()
+    prize_description = models.TextField()
+    rating = models.IntegerField()
+    is_active = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
+class Carts(models.Model):
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
+    order_date = models.DateField()
+
+class CartItems(models.Model):
+    cart = models.ForeignKey(Carts, on_delete=models.CASCADE)
+    prize = models.ForeignKey(Prizes, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+
+
+class PrizeOpinions(models.Model):
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
+    prize = models.ManyToManyField(Prizes)
+    opinion = models.TextField()
+    rating = models.IntegerField()

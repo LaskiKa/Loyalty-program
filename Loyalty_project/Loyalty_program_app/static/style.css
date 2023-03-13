@@ -103,6 +103,7 @@ input[type = submit] {
     padding: 10px 30px;
     border-radius: 12px;
     font-size: 15px;
+    margin: 10px;
 
 }
 
@@ -124,4 +125,40 @@ input[type = submit] {
     font-size: medium;
     text-decoration: none;
     padding: 10px;
+}
+
+.prize-content {
+    border-radius: 8px;
+    padding: 25px;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    width: 65%;
+    background-image: linear-gradient(darkgreen, green, darkgreen);
+    color: white;
+
+}
+
+.prize-details {
+    height: 60px;
+    font-size: large;
+}
+
+.prize-details-description {
+    height: 100%;
+    font-size: large;
+    padding: 10px;
+}
+
+.prize-order {
+    display: flex;
+    justify-content: center;
+}
+
+.prize-order-details[type=number] {
+    background-image: linear-gradient(green, darkgreen);
+    color: white;
+    width: 50px;
+    height: 25px;
+    margin-top: 15px;
 }

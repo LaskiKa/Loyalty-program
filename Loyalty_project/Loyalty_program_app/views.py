@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from Loyalty_program_app.models import Products, InvoiceProductsList, UserProfile, Invoices, Prizes
 from django.db.models.functions import ExtractYear
@@ -142,3 +142,25 @@ class PrizesAddView(CreateView):
     model = Prizes
     fields = '__all__'
     success_url = '/base/'
+
+class PrizeOrder(LoginRequiredMixin, View):
+
+    def get(self, request):
+        prizes = Prizes.objects.filter(is_active=True)
+
+        return render(request,
+                      'Loyalty_program_app/prize_order.html',
+                      context={
+                          "prizes": prizes,
+                      })
+
+class PrizeDetail(LoginRequiredMixin,View):
+    def get(self, request, pk):
+        userpoints = UserProfile.objects.get(user=self.request.user).points
+        prize = Prizes.objects.get(pk=pk)
+        return render(request,
+                      'Loyalty_program_app/prize_detail.html',
+                      context={
+                          "prize": prize,
+                          "userpoints":userpoints
+                      })

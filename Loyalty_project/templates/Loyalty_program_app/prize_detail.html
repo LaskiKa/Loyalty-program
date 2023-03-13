@@ -1,0 +1,21 @@
+{% extends "Loyalty_program_app/user-main-site.html" %}
+{% block h1 %}<h1 class="prize-name">{{prize.name}}</h1> {% endblock %}
+{% block h2 %} {% endblock %}
+
+{% block content %}
+
+<div class="prize-content">
+    <div class="prize-details">Koszt: {{prize.points_value}}</div>
+    <div class="prize-details">Dostępna ilość: {{prize.available_quantity}}</div>
+    <div class="prize-details">Ocena: {{prize.rating}}</div>
+    <div class="prize-details">Opis nagrody:</div>
+    <div class="prize-details-description">{{prize.prize_description}}</div>
+    <form class="prize-order", action="" type="POST">
+
+        <input class="prize-order-details" type="submit" value="Zamów nagrodę">
+        <input class="prize-order-details" type="number" min="0" step="1">
+    </form>
+</div>
+
+
+{% endblock %}

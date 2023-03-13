@@ -1,0 +1,33 @@
+{% extends "Loyalty_program_app/user-main-site.html" %}
+
+{% block h2 %} <h2>Katalog nagród</h2> {% endblock %}
+
+{% block content %}
+
+<table>
+    <thead>
+    <tr>
+        <th>Nagroda</th>
+        <th>Koszt</th>
+        <th>Ocena</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for prize in prizes %}
+    <tr>
+        <th class="invoice-table"><a href="{% url 'prize-detail' prize.id %}">{{prize.name}}</a></th>
+        <td class="invoice-table">{{prize.points_value}}</td>
+        <td class="invoice-table">{{prize.rating}}</td>
+    </tr>
+    {% empty %}}
+    <tr>
+        <th class="invoice-table">Brak faktur</th>
+        <td class="invoice-table">-</td>
+        <td class="invoice-table">-</td>
+        <td class="invoice-table">-</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

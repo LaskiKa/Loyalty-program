@@ -1,0 +1,15 @@
+{% extends "Loyalty_program_app/base.html" %}
+
+{% block h1 %} Dodaj nagrodę {% endblock %}
+{% block h2 %}  {% endblock %}
+
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="dodaj nagrodę">
+</form>
+
+<div style="color: green">{{action}}</div>
+{% endblock %}

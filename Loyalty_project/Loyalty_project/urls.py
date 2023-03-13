@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Loyalty_program_app.views import Base, ProductAddView, UserMainSite, ProductUpdateView, InvoiceListView
-from Loyalty_program_app.views import InvoiceDetaliView, InvoiceAddView, PurchesSummary
+from Loyalty_program_app.views import InvoiceDetaliView, InvoiceAddView, PurchesSummary, PrizesAddView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +27,6 @@ urlpatterns = [
     path('invoices-list/', InvoiceListView.as_view(), name='invoices-list'),
     path('invoice-detail/<int:pk>/', InvoiceDetaliView.as_view(), name='invoice-detail'),
     path('invoice-add/', InvoiceAddView.as_view(), name='invoice-add'),
-    path('purchase-summary/<int:year>', PurchesSummary.as_view(), name='pruchase-summary')
+    path('purchase-summary/<int:year>', PurchesSummary.as_view(), name='pruchase-summary'),
+    path('prizes-add/', PrizesAddView.as_view(), name='prizes-add'),
 ]

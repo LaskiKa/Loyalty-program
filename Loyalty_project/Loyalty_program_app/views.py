@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from Loyalty_program_app.models import Products, InvoiceProductsList, UserProfile, Invoices
+from Loyalty_program_app.models import Products, InvoiceProductsList, UserProfile, Invoices, Prizes
 from django.db.models.functions import ExtractYear
 from django.views import View
 from django.views.generic import CreateView, UpdateView, DetailView
@@ -136,3 +136,9 @@ class PurchesSummary(LoginRequiredMixin, View):
                       context={"userpoints": userpoints,
                                "productsummary": productsummary.items(),
                                'years': years})
+
+
+class PrizesAddView(CreateView):
+    model = Prizes
+    fields = '__all__'
+    success_url = '/base/'

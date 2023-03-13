@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from Loyalty_program_app.models import Products, InvoiceProductsList, UserProfile, Invoices
-
+from django.db.models.functions import ExtractYear
 from django.views import View
 from django.views.generic import CreateView, UpdateView, DetailView
 from django.views.generic.list import ListView
@@ -98,11 +98,22 @@ class InvoiceAddView(LoginRequiredMixin, CreateView):
 class PurchesSummary(LoginRequiredMixin, View):
     """Zestawienie zakupów z podziałem na lata"""
 
-    def get(self, request):
-        userinvoices = Invoices.objects.filter(user=self.request.user.id).order_by('-sale_date')
+    def get(self, request, year=0):
         userpoints = UserProfile.objects.get(user=self.request.user).points
+        years = Invoices.objects.annotate(
+            year=ExtractYear('sale_date')).filter(
+            user=self.request.user.id).order_by('-sale_date')
         products = Products.objects.all()
         productsummary = {}
+
+        if year == 0:
+            userinvoices = Invoices.objects.filter(user=self.request.user.id)
+
+        else:
+            userinvoices = Invoices.objects.filter(
+                user=self.request.user.id).filter(
+                sale_date__year=year).order_by('-sale_date')
+
 
         for product in products:
             productsummary[product.name] = [0, 0]
@@ -119,9 +130,9 @@ class PurchesSummary(LoginRequiredMixin, View):
                 productsummary[item.products.name][0] += qty
                 productsummary[item.products.name][1] += productpoints
 
-                print(item.products.name, productsummary[item.products.name][0], productsummary[item.products.name][1] )
 
         return render(request,
                       'Loyalty_program_app/purchase_summary.html',
                       context={"userpoints": userpoints,
-                               "productsummary": productsummary.items()})
+                               "productsummary": productsummary.items(),
+                               'years': years})

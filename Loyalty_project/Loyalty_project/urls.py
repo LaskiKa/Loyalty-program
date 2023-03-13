@@ -27,5 +27,5 @@ urlpatterns = [
     path('invoices-list/', InvoiceListView.as_view(), name='invoices-list'),
     path('invoice-detail/<int:pk>/', InvoiceDetaliView.as_view(), name='invoice-detail'),
     path('invoice-add/', InvoiceAddView.as_view(), name='invoice-add'),
-    path('purchase-summary/', PurchesSummary.as_view(), name='pruchase-summary')
+    path('purchase-summary/<int:year>', PurchesSummary.as_view(), name='pruchase-summary')
 ]

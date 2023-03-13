@@ -5,15 +5,42 @@
 {% block content %}
 
 
+<div class="year-button-nav">
+    <button class="year-button">
+        <a href="{% url 'pruchase-summary' 0 %}">Łącznie</a>
+    </button>
+    {% for year in years %}
+    <button class="year-button">
+        <a href="{% url 'pruchase-summary' year.sale_date.year %}">{{year.sale_date.year}}</a>
+    </button>
+    {%endfor%}
+</div>
 
-<!--        {% for year in years %}-->
-<!--        <button class="year-button-filer">{{year}}</button>-->
-<!--        {%endfor%}-->
-
-{% for key, list in productsummary %}
-<p> {{key}} - ilość: {{list.0}}, wartość punktów {{list.1}}</p>
-{% endfor %}
-
+<table>
+    <thead>
+    <tr>
+        <th>Produkt</th>
+        <th>Łączna ilość</th>
+        <th>Łączna liczba punktów</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for product, list in productsummary %}
+    <tr>
+        <th class="invoice-table">{{product}}</th>
+        <td class="invoice-table">{{list.0}}</td>
+        <td class="invoice-table">{{list.1}}</td>
+    </tr>
+    {% empty %}}
+    <tr>
+        <th class="invoice-table">Brak zakupów</th>
+        <td class="invoice-table">-</td>
+        <td class="invoice-table">-</td>
+        <td class="invoice-table">-</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
 
 
 {% endblock %}

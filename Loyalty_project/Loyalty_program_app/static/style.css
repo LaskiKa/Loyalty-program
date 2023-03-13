@@ -1,3 +1,6 @@
+body {
+    height: 100%;
+}
 
 header {
     width: 100%;
@@ -8,6 +11,7 @@ header {
 
 table {
     width: 100%;
+
 }
 
 table, th, td {
@@ -48,6 +52,11 @@ nav {
     padding: 10px 15px;
     text-decoration: none;
     color: white;
+}
+
+.clear {
+    clear: both;
+    height: 60px;
 }
 
 footer {
@@ -95,4 +104,24 @@ input[type = submit] {
     border-radius: 12px;
     font-size: 15px;
 
+}
+
+.year-button-nav {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+.year-button {
+    border-radius: 8px;
+    border-color: green;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.year-button a {
+    color: darkgreen;
+    font-weight: bold;
+    font-size: medium;
+    text-decoration: none;
+    padding: 10px;
 }

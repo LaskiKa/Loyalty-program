@@ -1,0 +1,39 @@
+{% extends "Loyalty_program_app/user-main-site.html" %}
+
+{% block h2 %} <h2>Historia zamówień</h2> {% endblock %}
+
+{% block content %}
+<div> Łączna wartość wydanych punktów: {{spentpointssum}} pkt </div>
+<table>
+    <thead>
+    <tr>
+        <th>Nagroda</th>
+        <th>Ilość</th>
+        <th>Data zamówienia</th>
+        <th>Wartość zamówienia</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in usercartiems %}
+    <tr>
+        <th class="invoice-table">{{item.prize}}</th>
+        <td class="invoice-table"> {{item.quantity}} </td>
+        <td class="invoice-table"> {{item.cart.order_date|date:"d.m.Y"}} </td>
+        {% for key, value in ordervalue %}
+        {% if key == item.id %}
+        <td class="invoice-table">{{value}} pkt</td>
+        {% endif %}
+        {%endfor%}
+    </tr>
+    {% empty %}
+    <tr>
+        <th class="invoice-table">Brak faktur</th>
+        <td class="invoice-table">-</td>
+        <td class="invoice-table">-</td>
+        <td class="invoice-table">-</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

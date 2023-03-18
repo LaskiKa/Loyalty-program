@@ -148,6 +148,8 @@ input[type = submit] {
     height: 100%;
     font-size: large;
     padding: 10px;
+    border: 2px solid darkgreen;
+    border-radius: 16px;
 }
 
 .prize-order {

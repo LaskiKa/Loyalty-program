@@ -1,0 +1,22 @@
+{% extends "Loyalty_program_app/user-main-site.html" %}
+{% block h1 %} {% endblock %}
+{% block h2 %} {% endblock %}
+
+{% block content %}
+
+<div class="prize-content">
+    <h1 class="prize-order-details">PODSUMOWANIE</h1>
+    <h2 class="prize-order-details">Zamówiona nagroda: {{ prize.name }} </h2>
+
+    <div class="prize-details">Koszt jednostkowy: {{ prize.points_value }} pkt</div>
+    <div class="prize-details">Liczba zamówionych nagród: {{ quantity }} szt</div>
+    <div class="prize-details">Łączny koszt: {{ costsum }} pkt</div>
+    <form class="prize-order" action="" method="POST">
+        {% csrf_token %}
+        <input class="prize-order-details" type="submit" name="order" value="Potwierdzam i zamawiam">
+        <input class="prize-order-details" name="quantity" type="hidden" min="0" step="1" value="{{quantity}}">
+    </form>
+</div>
+
+
+{% endblock %}

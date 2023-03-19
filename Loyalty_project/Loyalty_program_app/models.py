@@ -10,6 +10,9 @@ class UserProfile(models.Model):
     points = models.IntegerField(default=0)
     nip = models.CharField(max_length=10, null=True)
 
+    def __str__(self):
+        return str(self.user)
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

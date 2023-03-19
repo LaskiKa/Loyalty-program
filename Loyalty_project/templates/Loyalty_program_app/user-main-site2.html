@@ -1,0 +1,23 @@
+{% extends "Loyalty_program_app/base.html" %}
+
+{% block h1 %} Witaj {{ user }} {% endblock %}
+
+    {% block nav %}
+    <ul class="nav-links">
+        <li class="nav-item"><a href="{% url 'user-main-site' %}">Home</a></li>
+        <li class="nav-item"><a href="{% url 'invoices-list' %}">Zestawienie faktur</a></li>
+        <li class="nav-item"><a href="{% url 'pruchase-summary' 0 %}">Zestawienie zakupów</a></li>
+        <li class="nav-item"><a href="{% url 'prizes-order' %}">Katalog nagród</a></li>
+        <li class="nav-item"><a href="{% url 'orders-history' %}">Historia zamówień</a></li>
+        <li class="nav-item"><a href="{% url 'logout' %}">Wyloguj</a></li>
+    </ul>
+    <div class="nav-item-points">Aktualne saldo punktów: <input hidden="hidden" class="nav-item" name="userpoints" value="{{userpoints}}"> {{userpoints}}</div>
+
+    {% endblock %}
+
+{% block h2 %} <h2>Zapoznaj się z zasadami porgramu lojalnościowego</h2> {% endblock %}
+
+{% block content %}
+
+
+{% endblock %}

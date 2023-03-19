@@ -8,7 +8,7 @@
 <div>Szczegóły: </div>
 
 
-<table>
+<table class="table table-hover">
     <thead>
     <tr>
         <th>Nazwa produktu</th>
@@ -20,11 +20,11 @@
     {{object}}
     {% for product in invoiceproductlist %}
     <tr>
-        <th class="invoice-table">{{product.products.name}}</th>
-        <td class="invoice-table">{{product.qty}}</td>
+        <th>{{product.products.name}}</th>
+        <td>{{product.qty}}</td>
         {% for key, value in pointsperprod %}
         {% if key == product.id %}
-        <td class="invoice-table">{{value}}</td>
+        <td>{{value}}</td>
         {% endif %}
         {% endfor %}
     </tr>

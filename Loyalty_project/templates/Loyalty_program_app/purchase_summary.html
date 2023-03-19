@@ -1,22 +1,22 @@
 {% extends "Loyalty_program_app/user-main-site.html" %}
-
+{% block h1 %} {% endblock %}
 {% block h2 %} <h2>Zestawienie zakupów</h2> {% endblock %}
 
 {% block content %}
 
 
-<div class="year-button-nav">
-    <button class="year-button">
-        <a href="{% url 'pruchase-summary' 0 %}">Łącznie</a>
+<div class="d-flex flex-wrap justify-content-around py-3 mb-4 border-bottom">
+    <button class="btn btn-primary btn-sm">
+        <a class="text-white text-decoration-none" href="{% url 'pruchase-summary' 0 %}">Łącznie</a>
     </button>
     {% for year in years %}
-    <button class="year-button">
-        <a href="{% url 'pruchase-summary' year.sale_date.year %}">{{year.sale_date.year}}</a>
+    <button class="btn btn-primary btn-sm">
+        <a class="text-white text-decoration-none" href="{% url 'pruchase-summary' year.sale_date.year %}">{{year.sale_date.year}}</a>
     </button>
     {%endfor%}
 </div>
 
-<table>
+<table class="table table-hover">
     <thead>
     <tr>
         <th>Produkt</th>
@@ -27,16 +27,16 @@
     <tbody>
     {% for product, list in productsummary %}
     <tr>
-        <th class="invoice-table">{{product}}</th>
-        <td class="invoice-table">{{list.0}}</td>
-        <td class="invoice-table">{{list.1}}</td>
+        <th>{{product}}</th>
+        <td>{{list.0}}</td>
+        <td>{{list.1}}</td>
     </tr>
     {% empty %}}
     <tr>
-        <th class="invoice-table">Brak zakupów</th>
-        <td class="invoice-table">-</td>
-        <td class="invoice-table">-</td>
-        <td class="invoice-table">-</td>
+        <th>Brak zakupów</th>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
     </tr>
     {% endfor %}
     </tbody>

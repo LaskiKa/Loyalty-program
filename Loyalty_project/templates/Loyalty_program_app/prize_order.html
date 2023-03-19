@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<table>
+<table class="table table-hover">
     <thead>
     <tr>
         <th>Nagroda</th>
@@ -15,16 +15,16 @@
     <tbody>
     {% for prize in prizes %}
     <tr>
-        <th class="invoice-table"><a href="{% url 'prize-detail' prize.id %}">{{prize.name}}</a></th>
-        <td class="invoice-table">{{prize.points_value}}</td>
-        <td class="invoice-table">{{prize.rating}}</td>
+        <th><a class="text-decoration-none" href="{% url 'prize-detail' prize.id %}">{{prize.name}}</a></th>
+        <td>{{prize.points_value}}</td>
+        <td>{{prize.rating}}</td>
     </tr>
     {% empty %}}
     <tr>
-        <th class="invoice-table">Brak faktur</th>
-        <td class="invoice-table">-</td>
-        <td class="invoice-table">-</td>
-        <td class="invoice-table">-</td>
+        <th>Brak faktur</th>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
     </tr>
     {% endfor %}
     </tbody>

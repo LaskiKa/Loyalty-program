@@ -7,7 +7,7 @@
     <button class="invoice-add-button"><a href="{% url 'invoice-add' %}">Dodaj fakturę</a></button>
 </div>
 
-<table>
+<table class="table table-hover">
     <thead>
     <tr>
         <th>Numer faktury</th>
@@ -19,21 +19,21 @@
     <tbody>
     {% for invoice in userinvoices %}
     <tr>
-        <th class="invoice-table"><a href="{% url 'invoice-detail' invoice.id %}">{{invoice.invoice_number}}</a></th>
-        <td class="invoice-table">{{invoice.vendor}}</td>
-        <td class="invoice-table">{{invoice.sale_date|date:"d.m.Y" }}</td>
+        <th><a class="text-decoration-none" href="{% url 'invoice-detail' invoice.id %}">{{invoice.invoice_number}}</a></th>
+        <td>{{invoice.vendor}}</td>
+        <td>{{invoice.sale_date|date:"d.m.Y" }}</td>
         {% for key, value in pointsperinvoice %}
         {% if key == invoice.id %}
-        <td class="invoice-table">{{value}}</td>
+        <td>{{value}}</td>
         {% endif %}
         {%endfor%}
     </tr>
     {% empty %}}
     <tr>
-        <th class="invoice-table">Brak faktur</th>
-        <td class="invoice-table">-</td>
-        <td class="invoice-table">-</td>
-        <td class="invoice-table">-</td>
+        <th>Brak faktur</th>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
     </tr>
     {% endfor %}
     </tbody>

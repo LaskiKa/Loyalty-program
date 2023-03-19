@@ -4,7 +4,7 @@
 
 {% block content %}
 <div> Łączna wartość wydanych punktów: {{spentpointssum}} pkt </div>
-<table>
+<table class="table table-hover">
     <thead>
     <tr>
         <th>Nagroda</th>
@@ -16,21 +16,21 @@
     <tbody>
     {% for item in usercartiems %}
     <tr>
-        <th class="invoice-table">{{item.prize}}</th>
-        <td class="invoice-table"> {{item.quantity}} </td>
-        <td class="invoice-table"> {{item.cart.order_date|date:"d.m.Y"}} </td>
+        <th>{{item.prize}}</th>
+        <td> {{item.quantity}} </td>
+        <td> {{item.cart.order_date|date:"d.m.Y"}} </td>
         {% for key, value in ordervalue %}
         {% if key == item.id %}
-        <td class="invoice-table">{{value}} pkt</td>
+        <td>{{value}} pkt</td>
         {% endif %}
         {%endfor%}
     </tr>
     {% empty %}
     <tr>
-        <th class="invoice-table">Brak faktur</th>
-        <td class="invoice-table">-</td>
-        <td class="invoice-table">-</td>
-        <td class="invoice-table">-</td>
+        <th>Brak faktur</th>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
     </tr>
     {% endfor %}
     </tbody>

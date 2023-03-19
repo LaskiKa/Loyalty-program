@@ -11,7 +11,7 @@
     </button>
     {% for year in years %}
     <button class="btn btn-primary btn-sm">
-        <a class="text-white text-decoration-none" href="{% url 'pruchase-summary' year.sale_date.year %}">{{year.sale_date.year}}</a>
+        <a class="text-white text-decoration-none" href="{% url 'pruchase-summary' year %}">{{year}}</a>
     </button>
     {%endfor%}
 </div>

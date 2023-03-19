@@ -108,11 +108,15 @@ class PurchesSummary(LoginRequiredMixin, View):
 
     def get(self, request, year=0):
         userpoints = UserProfile.objects.get(user=self.request.user).points
-        years = Invoices.objects.annotate(
-            year=ExtractYear('sale_date')).filter(
+        invoices = Invoices.objects.filter(
             user=self.request.user.id).order_by('-sale_date')
         products = Products.objects.all()
         productsummary = {}
+        years = []
+
+        for invoice in invoices:
+            years.append(invoice.sale_date.year)
+        years = list(dict.fromkeys(years))
 
         if year == 0:
             userinvoices = Invoices.objects.filter(user=self.request.user.id)

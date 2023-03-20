@@ -6,9 +6,10 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href='{% static "style.css"  %}'>
     <title>Best Ever Loyalty Program</title>
+
 </head>
 <body>
-<div class="container">
+<div class="container h-25">
     <header class="d-flex flex-column justify-content-center py-3 mb-4 border-bottom">
         <a href="" class="d-flex justify-content-center text-dark text-decoration-none">
             <div class="fs-1 m-1">Best Ever Loyalty Program</div>
@@ -20,8 +21,8 @@
                 <a href="{% url 'main-site' %}" class="nav-link active" aria-current="page">Home</a>
             </li>
             <li class="nav-item"><a href="#" class="nav-link">Zasady</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Premiowane produkty</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Nagrody</a></li>
+            <li class="nav-item"><a href="{% url 'product-list' %}" class="nav-link">Premiowane produkty</a></li>
+            <li class="nav-item"><a href="{% url 'prizes-list' %}" class="nav-link">Nagrody</a></li>
             <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Zaloguj</a></li>
             <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link">Rejestracja</a></li>
         </ul>
@@ -35,35 +36,34 @@
 
 
     {% block content %}
-    <ul>
-        {% for product in products %}
-        <li> {{ product.name }}</li>
-        {% endfor %}
-    </ul>
+<div>Zasady programu</div>
     {% endblock %}
 
-    <div class="clear"></div>
-    <footer class="d-flex flex-wrap justify-content-around  py-3 mb-4 border-top fixed-bottom ">
-        <div class="col-md-4 d-flex align-items-center">
-            <span class="mb-3 mb-md-0 text-muted">© All rights reserved Kamil Łaski</span>
-        </div>
 
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            {% if user.is_authenticated %}
-            <li class="ms-3"><a class="text-muted" href="#">
-                <svg class="bi" width="24" height="24"></svg>
-                Zalogowany użytkownik {{ user }}</a></li>
-            <li class="ms-3"><a class="text-muted" href="{% url 'main-site'%}">
-                <svg class="bi" width="24" height="24"></svg>
-                Best Ever Loyalty Program</a></li>
-            {% else %}
-            <li class="ms-3"><a class="text-muted" href="{% url 'main-site'%}">
-                <svg class="bi" width="24" height="24"></svg>
-                Best Ever Loyalty Program</a></li>
-            {% endif %}
-        </ul>
-    </footer>
 </div>
+    <div class="clear"></div>
+    {% block footer %}
+<footer class="d-flex flex-wrap justify-content-around  py-3 mb-4 border-top fixed-bottom">
+    <div class="col-md-4 d-flex align-items-center">
+        <span class="mb-3 mb-md-0 text-muted">© All rights reserved Kamil Łaski</span>
+    </div>
+
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        {% if user.is_authenticated %}
+        <li class="ms-3"><a class="text-muted" href="#">
+            <svg class="bi" width="24" height="24"></svg>
+            Zalogowany użytkownik {{ user }}</a></li>
+        <li class="ms-3"><a class="text-muted" href="{% url 'main-site'%}">
+            <svg class="bi" width="24" height="24"></svg>
+            Best Ever Loyalty Program</a></li>
+        {% else %}
+        <li class="ms-3"><a class="text-muted" href="{% url 'main-site'%}">
+            <svg class="bi" width="24" height="24"></svg>
+            Best Ever Loyalty Program</a></li>
+        {% endif %}
+    </ul>
+</footer>
+{% endblock %}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"

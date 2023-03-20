@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from Loyalty_program_app.views import MainSite, SignUpView, ProductAddView, UserMainSite, ProductUpdateView, InvoiceListView
 from Loyalty_program_app.views import InvoiceDetaliView, InvoiceAddView, PurchesSummary, PrizesAddView, PrizeOrder
-from Loyalty_program_app.views import PrizeDetail, OrderHistory
+from Loyalty_program_app.views import PrizeDetail, OrderHistory, ProductList, PrizesList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,12 +26,14 @@ urlpatterns = [
     path('main/', MainSite.as_view(), name='main-site'),
     path('user-main-site/', UserMainSite.as_view(), name='user-main-site'),
     path('product-add/', ProductAddView.as_view(), name='product-add'),
+    path('product-list/', ProductList.as_view(), name='product-list'),
     path('product-update/<int:pk>/', ProductUpdateView.as_view(), name='product-update'),
     path('invoices-list/', InvoiceListView.as_view(), name='invoices-list'),
     path('invoice-detail/<int:pk>/', InvoiceDetaliView.as_view(), name='invoice-detail'),
     path('invoice-add/', InvoiceAddView.as_view(), name='invoice-add'),
     path('purchase-summary/<int:year>', PurchesSummary.as_view(), name='pruchase-summary'),
     path('prizes-add/', PrizesAddView.as_view(), name='prizes-add'),
+    path('prizes-list/', PrizesList.as_view(), name='prizes-list'),
     path('prizes-order/', PrizeOrder.as_view(), name='prizes-order'),
     path('prize-detail/<int:pk>/', PrizeDetail.as_view(), name='prize-detail'),
     path('orders-history/', OrderHistory.as_view(), name='orders-history'),

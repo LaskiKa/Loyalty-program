@@ -1,6 +1,6 @@
 {% extends "Loyalty_program_app/user-main-site.html" %}
-
-{% block h2 %} <h2>Historia zamówień</h2> {% endblock %}
+{% block h1 %} Historia zamówień {% endblock %}
+{% block h2 %} {% endblock %}
 
 {% block content %}
 <div> Łączna wartość wydanych punktów: {{spentpointssum}} pkt </div>
@@ -27,7 +27,7 @@
     </tr>
     {% empty %}
     <tr>
-        <th>Brak faktur</th>
+        <th>Brak zakupionych nagród</th>
         <td>-</td>
         <td>-</td>
         <td>-</td>

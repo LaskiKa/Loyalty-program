@@ -15,10 +15,17 @@ from datetime import date
 class MainSite(View):
     """Main site of LP app"""
     def get(self, request):
+        return render(request,
+                      'Loyalty_program_app/base.html')
+
+class ProductList(View):
+    """View with premium products"""
+    def get(self, request):
         products = Products.objects.all()
         return render(request,
-                      'Loyalty_program_app/base.html',
+                      'Loyalty_program_app/products_list.html',
                       {'products': products})
+
 
 class SignUpView(CreateView):
     form_class = UserCreationForm
@@ -152,6 +159,13 @@ class PrizesAddView(CreateView):
     model = Prizes
     fields = '__all__'
     success_url = '/base/'
+
+class PrizesList(View):
+    def get(self, request):
+        prizes = Prizes.objects.all()
+        return render(request,
+                      "Loyalty_program_app/prize_list.html",
+                      {"prizes": prizes})
 
 
 class PrizeOrder(LoginRequiredMixin, View):

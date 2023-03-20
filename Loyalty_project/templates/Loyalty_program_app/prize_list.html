@@ -1,0 +1,58 @@
+{% extends "Loyalty_program_app/base.html" %}
+
+{% block h1 %} Zbieraj punkty na nagrody !{% endblock %}
+{% block h2 %}  {% endblock %}
+
+{% block content %}
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Nagroda</th>
+        <th>Wartość punktowa</th>
+        <th>Ocena</th>
+        <th>Opis</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for prize in prizes %}
+    <tr>
+        <th>{{prize.name}}</th>
+        <td>{{prize.points_value}}</td>
+        <td>{{prize.rating}}</td>
+        <td>{{prize.prize_description}}</td>
+    </tr>
+    {% empty %}}
+    <tr>
+        <th>Obecnie brak nagród do wyboru</th>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block footer %}
+<footer class="d-flex flex-wrap justify-content-around  py-3 mb-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+        <span class="mb-3 mb-md-0 text-muted">© All rights reserved Kamil Łaski</span>
+    </div>
+
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        {% if user.is_authenticated %}
+        <li class="ms-3"><a class="text-muted" href="#">
+            <svg class="bi" width="24" height="24"></svg>
+            Zalogowany użytkownik {{ user }}</a></li>
+        <li class="ms-3"><a class="text-muted" href="{% url 'main-site'%}">
+            <svg class="bi" width="24" height="24"></svg>
+            Best Ever Loyalty Program</a></li>
+        {% else %}
+        <li class="ms-3"><a class="text-muted" href="{% url 'main-site'%}">
+            <svg class="bi" width="24" height="24"></svg>
+            Best Ever Loyalty Program</a></li>
+        {% endif %}
+    </ul>
+</footer>
+{% endblock %}

@@ -16,7 +16,7 @@ class Command(BaseCommand):
                 vendor = row[1]
                 sale_date = row[2]
                 total_price = row[3]
-                user_id = row[4]
+                purchaser_nip = row[4]
                 product_id = row[5]
                 qty = row[6]
 
@@ -24,10 +24,11 @@ class Command(BaseCommand):
                     uniqueinvoice.append(invoice_number)
                     invoice = Invoices.objects.get_or_create(
                         invoice_number=invoice_number,
+                        purchaser_nip=purchaser_nip,
                         vendor=vendor,
                         sale_date=sale_date,
                         total_price=total_price,
-                        user_id=user_id
+                        user=UserProfile.objects.get(nip=purchaser_nip)
                     )
 
                 invoiceproductlist = InvoiceProductsList.objects.get_or_create(

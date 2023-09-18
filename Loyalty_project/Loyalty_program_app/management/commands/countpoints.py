@@ -10,8 +10,8 @@ class Command(BaseCommand):
         for invoice in notcountedinvoices:
             invoiceproductlist = InvoiceProductsList.objects.filter(invoice=invoice.pk)
             for item in invoiceproductlist:
-                qty = item.qty
-                productbasicpoints = item.products.basic_points
+                qty = int(item.qty)
+                productbasicpoints = int(item.products.basic_points)
                 sumofpoints = int(qty * productbasicpoints)
 
 
@@ -19,7 +19,9 @@ class Command(BaseCommand):
                 invoice.save()
 
             user = UserProfile.objects.get(pk=invoice.user.pk)
-            user.points += invoice.points
+            user_points = int(user.points)
+            user_points += invoice.points
+            user.points = user_points
             user.save()
             invoice.countpoints = True
             invoice.save()

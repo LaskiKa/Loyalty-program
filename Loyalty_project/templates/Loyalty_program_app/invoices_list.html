@@ -1,13 +1,14 @@
 {% extends "Loyalty_program_app/user-main-site.html" %}
 
-{% block h2 %} <h2>Lista faktur</h2> {% endblock %}
+{% block h1 %} Lista faktur {% endblock %}
+{% block h2 %}  {% endblock %}
 
 {% block content %}
 <div class="invoice-add">
     <button class="invoice-add-button"><a href="{% url 'invoice-add' %}">Dodaj fakturę</a></button>
 </div>
 
-<table>
+<table class="table table-hover">
     <thead>
     <tr>
         <th>Numer faktury</th>
@@ -19,24 +20,46 @@
     <tbody>
     {% for invoice in userinvoices %}
     <tr>
-        <th class="invoice-table"><a href="{% url 'invoice-detail' invoice.id %}">{{invoice.invoice_number}}</a></th>
-        <td class="invoice-table">{{invoice.vendor}}</td>
-        <td class="invoice-table">{{invoice.sale_date|date:"d.m.Y" }}</td>
+        <th><a class="text-decoration-none" href="{% url 'invoice-detail' invoice.id %}">{{invoice.invoice_number}}</a></th>
+        <td>{{invoice.vendor}}</td>
+        <td>{{invoice.sale_date|date:"d.m.Y" }}</td>
         {% for key, value in pointsperinvoice %}
         {% if key == invoice.id %}
-        <td class="invoice-table">{{value}}</td>
+        <td>{{value}}</td>
         {% endif %}
         {%endfor%}
     </tr>
     {% empty %}}
     <tr>
-        <th class="invoice-table">Brak faktur</th>
-        <td class="invoice-table">-</td>
-        <td class="invoice-table">-</td>
-        <td class="invoice-table">-</td>
+        <th>Brak faktur</th>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
+{% endblock %}
 
+{% block footer %}
+    <footer class="d-flex flex-wrap justify-content-around  py-3 mb-4 border-top">
+        <div class="col-md-4 d-flex align-items-center">
+            <span class="mb-3 mb-md-0 text-muted">© All rights reserved Kamil Łaski</span>
+        </div>
+
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            {% if user.is_authenticated %}
+            <li class="ms-3"><a class="text-muted" href="#">
+                <svg class="bi" width="24" height="24"></svg>
+                Zalogowany użytkownik {{ user }}</a></li>
+            <li class="ms-3"><a class="text-muted" href="{% url 'main-site'%}">
+                <svg class="bi" width="24" height="24"></svg>
+                Best Ever Loyalty Program</a></li>
+            {% else %}
+            <li class="ms-3"><a class="text-muted" href="{% url 'main-site'%}">
+                <svg class="bi" width="24" height="24"></svg>
+                Best Ever Loyalty Program</a></li>
+            {% endif %}
+        </ul>
+    </footer>
 {% endblock %}

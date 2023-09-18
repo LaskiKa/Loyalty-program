@@ -1,21 +1,27 @@
 {% extends "Loyalty_program_app/user-main-site.html" %}
-{% block h1 %}<h1 class="prize-name">{{prize.name}}</h1> {% endblock %}
+{% block h1 %}<h1 class="">{{prize.name}}</h1> {% endblock %}
+
 {% block h2 %} {% endblock %}
 
 {% block content %}
 
-<div class="prize-content">
-    <div class="prize-details">Koszt: {{prize.points_value}} pkt</div>
-    <div class="prize-details">Dostępna ilość: {{prize.available_quantity}} szt</div>
-    <div class="prize-details">Ocena: {{prize.rating}}</div>
-    <div class="prize-details">Opis nagrody:</div>
-    <div class="prize-details-description">{{prize.prize_description}}</div>
-    <form class="prize-order"  action="" method="POST">
-        {% csrf_token %}
-        <input class="prize-order-details" type="submit" name="order" value="Zamów nagrodę">
-        <input class="prize-order-details"  name="quantity" type="number" min="1" step="1" value="0">
-    </form>
+<div class="d-flex py-3 mb-4 border-bottom justify-content-around fw-bold">
+    <div class="">Koszt: {{prize.points_value}} pkt</div>
+    <div class="">Dostępna ilość: {{prize.available_quantity}} szt</div>
+    <div class="">Ocena: {{prize.rating}}</div>
 </div>
 
+<div class="d-flex flex-wrap">
+    <div class="ms-1 fw-bold">Opis nagrody:</div>
+    <div class="ms-1">{{prize.prize_description}}</div>
+</div>
+
+<form class="d-flex justify-content-center mt-3" action="" method="POST">
+    {% csrf_token %}
+    <input class="btn btn-primary" type="submit" name="order" value="Zamów nagrodę">
+    <input class="ms-3 col-1 text-center" name="quantity" type="number" min="1" step="1" value="0">
+</form>
+
+<hr class="featurette-divider">
 
 {% endblock %}

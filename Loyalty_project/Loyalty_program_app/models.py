@@ -8,10 +8,10 @@ from django.dispatch import receiver
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     points = models.IntegerField(default=0)
-    nip = models.IntegerField(default=1)
+    nip = models.CharField(max_length=10, null=True)
 
     def __str__(self):
-        return str(self.name)
+        return str(self.user)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -21,7 +21,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 class Invoices(models.Model):
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
-    purchaser_nip = models.IntegerField()
+    purchaser_nip = models.CharField(max_length=10, null=True)
     invoice_number = models.CharField(max_length=255, null=True)
     vendor = models.CharField(max_length=255, null=True)
     products = models.ManyToManyField("Products", through="InvoiceProductsList")

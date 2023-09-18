@@ -15,10 +15,17 @@ from datetime import date
 class MainSite(View):
     """Main site of LP app"""
     def get(self, request):
+        return render(request,
+                      'Loyalty_program_app/base.html')
+
+class ProductList(View):
+    """View with premium products"""
+    def get(self, request):
         products = Products.objects.all()
         return render(request,
-                      'Loyalty_program_app/base.html',
+                      'Loyalty_program_app/products_list.html',
                       {'products': products})
+
 
 class SignUpView(CreateView):
     """Sign up View"""
@@ -110,11 +117,15 @@ class PurchesSummary(LoginRequiredMixin, View):
 
     def get(self, request, year=0):
         userpoints = UserProfile.objects.get(user=self.request.user).points
-        years = Invoices.objects.annotate(
-            year=ExtractYear('sale_date')).filter(
+        invoices = Invoices.objects.filter(
             user=self.request.user.id).order_by('-sale_date')
         products = Products.objects.all()
         productsummary = {}
+        years = []
+
+        for invoice in invoices:
+            years.append(invoice.sale_date.year)
+        years = list(dict.fromkeys(years))
 
         if year == 0:
             userinvoices = Invoices.objects.filter(user=self.request.user.id)
@@ -150,6 +161,13 @@ class PrizesAddView(CreateView):
     model = Prizes
     fields = '__all__'
     success_url = '/base/'
+
+class PrizesList(View):
+    def get(self, request):
+        prizes = Prizes.objects.all()
+        return render(request,
+                      "Loyalty_program_app/prize_list.html",
+                      {"prizes": prizes})
 
 
 class PrizeOrder(LoginRequiredMixin, View):

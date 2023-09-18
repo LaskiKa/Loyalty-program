@@ -28,6 +28,7 @@ class ProductList(View):
 
 
 class SignUpView(CreateView):
+    """Sign up View"""
     form_class = UserCreationForm
     success_url = reverse_lazy("login")
     template_name = "registration/signup.html"
@@ -43,6 +44,7 @@ class UserMainSite(LoginRequiredMixin, View):
 
 
 class ProductAddView(LoginRequiredMixin, CreateView):
+    """"""
     model = Products
     fields = ["name", "unit_price", "basic_points", "category"]
     success_url = "/base/"  # do poprawki + zmiana tempaltki

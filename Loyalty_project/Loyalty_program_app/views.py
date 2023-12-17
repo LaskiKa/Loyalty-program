@@ -47,7 +47,7 @@ class ProductAddView(LoginRequiredMixin, CreateView):
     """"""
     model = Products
     fields = ["name", "unit_price", "basic_points", "category"]
-    success_url = "/base/"  # do poprawki + zmiana tempaltki
+    success_url = "/main/"  # do poprawki + zmiana tempaltki
 
     def form_valid(self, form):
         form.save()

@@ -1,33 +1,69 @@
 {% extends "Loyalty_program_app/user-main-site.html" %}
+{% load static %}
 {% block h1 %} Katalog nagród {% endblock %}
 {% block h2 %} {% endblock %}
 
 {% block content %}
 
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th>Nagroda</th>
-        <th>Koszt</th>
-        <th>Ocena</th>
-    </tr>
-    </thead>
-    <tbody>
+<div id="prize-container"
+     class="d-flex justify-content-center flex-wrap"
+>
     {% for prize in prizes %}
-    <tr>
-        <th><a class="text-decoration-none" href="{% url 'prize-detail' prize.id %}">{{prize.name}}</a></th>
-        <td>{{prize.points_value}}</td>
-        <td>{{prize.rating}}</td>
-    </tr>
+
+    <a href="{% url 'prize-detail' prize.id %}"
+       style="text-decoration:none"
+    >
+
+        <div id="prize-box"
+             class="btn btn-light d-flex flex-column m-5 p-1 "
+             style="height: 400px; width: 300px"
+        >
+
+            <div id="prize-box-image"
+                 class="h-50 rounded-top "
+            >
+                <img src="{% static 'voucher.jpg'%}"
+                     class="h-100 w-100 rounded-circle"
+                     style="object-fit: contain">
+            </div>
+
+            <div id="prize-box-details"
+                 class="h-50 p-1 d-flex flex-column text-secondary"
+            >
+                <div id="prize-box-details-name"
+                     class="h4 text-primary"
+                >{{prize.name}}
+                </div>
+                <div id="prize-box-details-description"
+                     class=""
+                >Szczegóły:
+                    <p style="font-size: 12px">{{prize.prize_description}}</p>
+                </div>
+
+                <div id="prize-box-details-values"
+                     class="d-flex justify-content-around"
+                >
+                    <div id="prize-box-details-points"
+                         class="mt-auto"
+                    >Punkty: {{prize.points_value}}
+                    </div>
+
+                    <div id="prize-box-details-rate"
+                         class="mt-auto"
+                    >Ocena: {{prize.rating}}
+                    </div>
+                </div>
+
+            </div>
+            <div id="line-sep-start" class="bg-primary rounded mt-2" style="height:5px"></div>
+
+        </div>
+    </a>
+
     {% empty %}}
-    <tr>
-        <th>Brak faktur</th>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-    </tr>
+    <div class="bg-primary" style="height: 250px; width: 180px">Obecnie prak nagród</div>
     {% endfor %}
-    </tbody>
-</table>
+
+</div>
 
 {% endblock %}

@@ -36,13 +36,36 @@
 
 
     {% block content %}
-<div>Zasady programu</div>
+    <hr class="featurette-divider m-5">
+    <div class="d-flex">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">Zasady programu</h2>
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Duis a tempus leo. Maecenas et dignissim augue. Etiam lacus quam,
+                tempus in tempor viverra, vestibulum et turpis. Vivamus at efficitur purus.
+                Quisque est est, vestibulum eleifend tortor at, consectetur egestas tellus.
+                Nullam a enim quis odio pretium venenatis quis eget sem. Morbi porttitor,
+                erat at ullamcorper commodo, lacus risus commodo dolor, quis fringilla nisi ante quis nunc.
+                Morbi porttitor vitae odio vitae iaculis. Vivamus hendrerit est vitae dolor lacinia porta.
+                Aenean dapibus vitae mauris ac lacinia. Vivamus malesuada elit eget placerat eleifend.
+                Pellentesque porttitor eget justo eu sollicitudin. Pellentesque dapibus lobortis dui,
+                eget ultricies purus luctus eget. Sed vel enim rutrum, scelerisque diam nec, sodales leo.</p>
+        </div>
+
+        <div class="col-md-5">
+            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500"
+                 style="width: 500px; height: 500px;"
+                 src="{% static 'paragraf.jpg'%}"
+                 data-holder-rendered="true">
+        </div>
+    </div>
+    <hr class="featurette-divider m-5">
     {% endblock %}
 
 
 </div>
-    <div class="clear"></div>
-    {% block footer %}
+<div class="clear"></div>
+{% block footer %}
 <footer class="d-flex flex-wrap justify-content-around  py-3 mb-4 border-top fixed-bottom">
     <div class="col-md-4 d-flex align-items-center">
         <span class="mb-3 mb-md-0 text-muted">© All rights reserved Kamil Łaski</span>

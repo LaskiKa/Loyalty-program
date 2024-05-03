@@ -48,6 +48,8 @@ DATABASES = {
     }
 }
 ```
+## management functions
+[import data][https://github.com/LaskiKa/Loyalty-program/blob/b0a1ae1244f2e817ed5796363ad33bb04162fa97/Loyalty_project/Loyalty_program_app/management/commands/importdata.py]
 
 ## Screen shots
 ### Loyalty Program Rule

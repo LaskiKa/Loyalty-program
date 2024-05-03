@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
 # Create your models here.
 
 class UserProfile(models.Model):
@@ -12,6 +13,7 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return str(self.user)
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -37,8 +39,6 @@ class InvoiceProductsList(models.Model):
     qty = models.IntegerField()
 
 
-
-
 class Products(models.Model):
     name = models.CharField(max_length=255)
     unit_price = models.DecimalField(decimal_places=2, max_digits=9)
@@ -47,6 +47,7 @@ class Products(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Prizes(models.Model):
     name = models.CharField(max_length=255)
@@ -59,10 +60,12 @@ class Prizes(models.Model):
     def __str__(self):
         return self.name
 
+
 class Carts(models.Model):
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
     prize = models.ManyToManyField(Prizes, through='CartItems')
     order_date = models.DateField()
+
 
 class CartItems(models.Model):
     cart = models.ForeignKey(Carts, on_delete=models.CASCADE)

@@ -14,12 +14,15 @@ from datetime import date
 # Create your views here.
 class MainSite(View):
     """Main site of LP app"""
+
     def get(self, request):
         return render(request,
                       'Loyalty_program_app/base.html')
 
+
 class ProductList(View):
     """View with premium products"""
+
     def get(self, request):
         products = Products.objects.all()
         return render(request,
@@ -36,8 +39,14 @@ class SignUpView(CreateView):
 
 class UserMainSite(LoginRequiredMixin, View):
     """Main site of LP app for logged users"""
+
     def get(self, request):
-        userpoints = UserProfile.objects.get(user=self.request.user).points
+        # userpoints = UserProfile.objects.get(user=self.request.user).points
+        userprofile = UserProfile.objects.filter(user=self.request.user)
+        if not userprofile:
+            userpoints = 0
+        else:
+            userpoints = userprofile.points
         return render(request,
                       "Loyalty_program_app/user-main-site.html",
                       context={'userpoints': userpoints})
@@ -161,6 +170,7 @@ class PrizesAddView(CreateView):
     model = Prizes
     fields = '__all__'
     success_url = '/base/'
+
 
 class PrizesList(View):
     def get(self, request):

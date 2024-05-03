@@ -67,10 +67,10 @@ python manage.py countpoints
 
 ## Screen shots
 ### Loyalty Program Rule
-![img.png](img.png)
+![img.png](pic/img.png)
 
 ### Prize catalog
-![img_1.png](img_1.png)
+![img_1.png](pic/img_1.png)
 
 ### Prizze details & order
-![img_2.png](img_2.png)
+![img_2.png](pic/img_2.png)
